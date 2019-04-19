@@ -4,33 +4,29 @@ namespace Cyve\TwigExtensions\Test;
 
 use Cyve\TwigExtensions\SortByExtension;
 use Cyve\TwigExtensions\Test\Model\Band;
+use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
-class SortByExtensionTest extends TwigExtensionTestCase
+class SortByExtensionTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->engine->addExtension(new SortByExtension());
-    }
-
     /**
      * @dataProvider SortByDataProvider
      */
-    public function testSortBy($array)
+    public function test($array)
     {
-        $this->assertEquals('[{"name":"Metallica","genre":"metal"},{"name":"Nirvana","genre":"rock"}]', $this->engine->render('sortBy.html.twig', ['array' => $array]));
+        $loader = new ArrayLoader([
+            'sortBy.html.twig' => '{{ array|sortBy("name")|json_encode|raw }}',
+            'sortByName.html.twig' => '{{ array|sortByName|json_encode|raw }}',
+        ]);
+        $twig = new Environment($loader);
+        $twig->addExtension(new SortByExtension());
+
+        $this->assertEquals('[{"name":"Metallica","genre":"metal"},{"name":"Nirvana","genre":"rock"}]', $twig->render('sortBy.html.twig', ['array' => $array]));
+        $this->assertEquals('[{"name":"Metallica","genre":"metal"},{"name":"Nirvana","genre":"rock"}]', $twig->render('sortByName.html.twig', ['array' => $array]));
     }
 
-    /**
-     * @dataProvider SortByDataProvider
-     */
-    public function testSortByX($array)
-    {
-        $this->assertEquals('[{"name":"Metallica","genre":"metal"},{"name":"Nirvana","genre":"rock"}]', $this->engine->render('sortByName.html.twig', ['array' => $array]));
-    }
-
-    public function SortByDataProvider()
+    public function sortByDataProvider()
     {
         yield [[
             ['name' => 'Nirvana', 'genre' => 'rock'],

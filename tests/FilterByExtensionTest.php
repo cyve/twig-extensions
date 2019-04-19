@@ -4,30 +4,26 @@ namespace Cyve\TwigExtensions\Test;
 
 use Cyve\TwigExtensions\FilterByExtension;
 use Cyve\TwigExtensions\Test\Model\Band;
+use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
-class FilterByExtensionTest extends TwigExtensionTestCase
+class FilterByExtensionTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->engine->addExtension(new FilterByExtension());
-    }
-
     /**
      * @dataProvider filterByDataProvider
      */
-    public function testFilterBy($array)
+    public function test($array)
     {
-        $this->assertEquals('[{"name":"Nirvana","genre":"rock"}]', $this->engine->render('filterBy.html.twig', ['array' => $array]));
-    }
+        $loader = new ArrayLoader([
+            'filterBy.html.twig' => '{{ array|filterBy("genre", "rock")|json_encode|raw }}',
+            'filterByGenre.html.twig' => '{{ array|filterByGenre("rock")|json_encode|raw }}',
+        ]);
+        $twig = new Environment($loader);
+        $twig->addExtension(new FilterByExtension());
 
-    /**
-     * @dataProvider filterByDataProvider
-     */
-    public function testFilterByX($array)
-    {
-        $this->assertEquals('[{"name":"Nirvana","genre":"rock"}]', $this->engine->render('filterByGenre.html.twig', ['array' => $array]));
+        $this->assertEquals('[{"name":"Nirvana","genre":"rock"}]', $twig->render('filterBy.html.twig', ['array' => $array]));
+        $this->assertEquals('[{"name":"Nirvana","genre":"rock"}]', $twig->render('filterByGenre.html.twig', ['array' => $array]));
     }
 
     public function filterByDataProvider()
