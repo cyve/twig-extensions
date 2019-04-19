@@ -1,0 +1,25 @@
+{
+    "name": "cyve/twig-extensions",
+    "description": "Additionnal Twig extensions",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cyril Vmd",
+            "email": "cyril@cyrilwebdesign.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "twig/twig": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cyve\\TwigExtensions\\": "src/",
+            "Cyve\\TwigExtensions\\Test\\": "tests/"
+        }
+    }
+}
