@@ -11,7 +11,7 @@ use Twig\Loader\ArrayLoader;
 class SortByExtensionTest extends TestCase
 {
     /**
-     * @dataProvider SortByDataProvider
+     * @dataProvider sortByDataProvider
      */
     public function test($array)
     {

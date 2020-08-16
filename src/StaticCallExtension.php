@@ -7,9 +7,6 @@ use Twig\TwigFunction;
 
 class StaticCallExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFunctions(): array
 	{
         return [
@@ -17,13 +14,6 @@ class StaticCallExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param string $class
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     * @throws \InvalidArgumentException if class or method does not exists
-     */
     public function staticCall(string $class, string $method, array $args = [])
 	{
         if (!class_exists($class)) {

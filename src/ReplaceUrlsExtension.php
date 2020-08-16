@@ -7,9 +7,6 @@ use Twig\TwigFilter;
 
 class ReplaceUrlsExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         return [
@@ -17,10 +14,6 @@ class ReplaceUrlsExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param string $value
-     * @return string
-     */
     public function replaceUrls(string $value): string
     {
         return preg_replace("/(https?:\/\/)+[a-zA-Z0-9-_.:\/#@?=&%+]+/", '<a href="$0" target="_blank">$0</a>', $value);

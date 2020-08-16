@@ -7,9 +7,6 @@ use Twig\TwigFunction;
 
 class FontAwesomeExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFunctions(): array
     {
         return [
@@ -17,10 +14,6 @@ class FontAwesomeExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param string $url
-     * @return string
-     */
     public function getFaClassFromUrl(string $url): string
     {
         if(preg_match("/facebook.com/i", $url)) return 'fa-facebook';

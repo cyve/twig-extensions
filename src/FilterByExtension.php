@@ -7,9 +7,6 @@ use Twig\TwigFilter;
 
 class FilterByExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         return [
@@ -18,12 +15,6 @@ class FilterByExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param iterable $array
-     * @param string $property
-     * @param $value
-     * @return array
-     */
     public function filterBy(iterable $array, string $property, $value): array
     {
         if ($array instanceof \Traversable) {
@@ -35,22 +26,11 @@ class FilterByExtension extends AbstractExtension
         });
     }
 
-    /**
-     * @param string $property
-     * @param iterable $array
-     * @param mixed $value
-     * @return array
-     */
     public function filterByX(string $property, iterable $array, $value): array
     {
         return $this->filterBy($array, strtolower($property), $value);
     }
 
-    /**
-     * @param object|array $element
-     * @param string $property
-     * @return mixed
-     */
     private function getValue($element, string $property)
     {
         if (is_array($element) && isset($element[$property])) {

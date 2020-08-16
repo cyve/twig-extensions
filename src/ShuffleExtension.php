@@ -7,9 +7,6 @@ use Twig\TwigFilter;
 
 class ShuffleExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         return [
@@ -17,10 +14,6 @@ class ShuffleExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param iterable $array
-     * @return array
-     */
     public function shuffle(iterable $array): array
     {
         if ($array instanceof \Traversable) {

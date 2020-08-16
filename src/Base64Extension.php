@@ -7,9 +7,6 @@ use Twig\TwigFilter;
 
 class Base64Extension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         return [

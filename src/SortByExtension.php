@@ -7,9 +7,6 @@ use Twig\TwigFilter;
 
 class SortByExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         return [
@@ -18,11 +15,6 @@ class SortByExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param iterable $array
-     * @param string $property
-     * @return array
-     */
     public function sortBy(iterable $array, string $property): array
     {
         if ($array instanceof \Traversable) {
@@ -36,21 +28,11 @@ class SortByExtension extends AbstractExtension
         return $array;
     }
 
-    /**
-     * @param string $property
-     * @param iterable $array
-     * @return array
-     */
     public function sortByX(string $property, iterable $array): array
     {
         return $this->sortBy($array, strtolower($property));
     }
 
-    /**
-     * @param object|array $element
-     * @param string $property
-     * @return mixed
-     */
     private function getValue($element, string $property)
     {
         if (is_array($element) && isset($element[$property])) {
